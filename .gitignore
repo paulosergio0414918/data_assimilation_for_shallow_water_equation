@@ -1,0 +1,6 @@
+# ignorando todos os arquivos gerados automaticamente pelo tex
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz

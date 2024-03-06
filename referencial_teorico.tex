@@ -1,0 +1,61 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[portuguese]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{subfigure}
+\usepackage{vmargin}
+\usepackage{indentfirst}
+\everymath{\displaystyle}
+\usepackage{natbib}
+%\usepackage[bottom=2cm,top=3cm,left=5cm,right=2cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\graphicspath{{images/}}
+\newtheorem{definicao}{Definicão}
+\author{Paulo Sérgio Lopes da Silva}
+\title{Referencial teórico}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\section{Artigos Core}
+	\cite{kevlahan2019convergence} Este artigo é o primeiro de três artigos do Nicolas Kevlahan que consiste em tentar fazer uma assimilação unidimensional de SWE e recuperar a condição inicial. Os autores focam nos aspectos computacionais do problema de  escolher o número de observações da superfície da onda  e localização de sensores para aproximar assimilação dos dados usando a técnica variacional a qual estudarei usando a \cite{furtado2012data}.
+	
+	E de fato, \cite{furtado2012data} nos traz a ideia da técnica da assimilação de dados via cálculo variacional e perceptron de múltiplas camadas aplicada a equação da onda.
+	
+	Nas palavras do autor ``Vamos considerar'' o problema de determinar de forma ótima  condição inicial para a equação de águas rasas unidimensional em domínio ilimitado a partir de um pequeno conjunto de observações da altura da superfície do mar.
+	
+	Eles usaram a equação de águas rasas linear e não linear como modelo de propagação da onda do mar, porém afirmam que o resultado deles podem ser facilmente expandidos para outros modelos como o modelo Boussinesq(\textbf{se a resposta da tese for sim podemos tentar expandir para este outro modelo}).
+	
+	
+	\cite{khan2022data} É a versão para duas dimensões para o artigo acima, é de fundamental importância entender a estratégia usada por ele aqui para assimilar a condição inicial da equação e tentar verificar se é possível usar esta estratégia via machine learning ou vai deep learnning. A estratégia a ser adotada acredito que se encontra no artigo \cite{ghorbani2023data}.
+	
+	
+	\section{Artigos Relevantes}
+	
+	\cite{kochkov2023neural} artigo a ser lido e verificar o seu conteúdo. \textcolor{red}{Ainda falta ler}.
+	
+	\cite{artigo2021fabioamaral} este é um artigo do mesmo autor da tese que o professor Pedro enviou \textcolor{red}{Ainda falta ler}
+	
+	\cite{disertacaoKhan} Esta é a dissertação de mestrado que originou o artigo \cite{kevlahan2019convergence}. Nesta dissertação encontra-se uma bom referencial que apresenta compassadamente a equação de águas rasas. Nele também encontramos uma forma de discretização via volumes finitos desta equação em uma dimensão. Esta referência também apresenta aspectos iniciais de assimilação de dados de maneira geral e assimilação especificamente para a equação de águas rasas.
+	
+	
+	\cite{cstefuanescu2015pod} Aparentemente é uma tentativa de fazer assimilação de dados para águas rasas de quarta dimensão(?).
+	\textcolor{blue}{Comentário Pedro: 4D Var significa assimilar nas 4 dimensões: 3 espaciais, x,y,z, e uma temporal t. Ou seja, ele minimiza o erro entre os dados e o modelo no tempo e espaço.}
+	
+	O artigo \cite{ghorbani2023data} é uma revisão bibliográfica contendo os principais artigos sobre assimilação de dados para a equação de águas rasas. É muito importante lê-lo para que possa extrair mais referências. Este artigo foi apresentado no curso de assimilação de dados através de deep learning no verão de 2024 no lncc.
+	
+	\section{Secundários}
+	
+	Para dar inicio ao estudo da equação de águas rasas usarei principalmente \cite{vallis2017atmospheric}. Esta é a referência citada pelo professor Pedro durante o curso de métodos de volumes finitos.
+	
+	\pagebreak
+	
+	\bibliographystyle{apalike}
+	\bibliography{bibliografia.bib}
+\end{document}

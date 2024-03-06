@@ -1,0 +1,28 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsfonts,amssymb,ifthen}
+\usepackage{geometry}
+\geometry{top=3cm, bottom=2cm, left=3cm, right=2cm}
+\usepackage{enumerate}
+\everymath{\displaystyle}
+\usepackage{natbib}
+
+\providecommand{\sin}{} \renewcommand{\sin}{\hspace{2pt}\textrm{sen}}
+\providecommand{\tan}{} \renewcommand{\tan}{\hspace{2pt}\textrm{tg}}
+
+\begin{document}
+	
+Documento criado apenas para gerar a bibliografia.
+
+\section{capitulo}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{referencias.bib}
+
+
+\end{document}

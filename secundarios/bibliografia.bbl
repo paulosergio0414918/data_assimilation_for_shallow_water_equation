@@ -1,0 +1,54 @@
+\begin{thebibliography}{1}
+
+\bibitem{cuminato2013discretizaccao}
+Jos{\'e}~Alberto Cuminato and Messias Meneguette.
+\newblock {\em Discretiza{\c{c}}{\~a}o de equa{\c{c}}{\~o}es diferenciais
+  parciais: t{\'e}cnicas de diferen{\c{c}}as finitas}.
+\newblock Sociedade Brasileira de Matem{\'a}tica, 2013.
+
+\bibitem{FRANCA2022110860}
+Hugo~L. França and Cassio~M. Oishi.
+\newblock A machine learning strategy for computing interface curvature in
+  front-tracking methods.
+\newblock {\em Journal of Computational Physics}, 450:110860, 2022.
+
+\bibitem{hackbusch2017elliptic}
+Wolfgang Hackbusch.
+\newblock {\em Elliptic differential equations: theory and numerical
+  treatment}, volume~18.
+\newblock Springer, 2017.
+
+\bibitem{article}
+Xiaoxing Liu, Koji Morita, and Shuai Zhang.
+\newblock Machine learning based surface tension model for multiphase flow
+  simulation using particle method.
+\newblock {\em International Journal for Numerical Methods in Fluids}, 93, 06
+  2020.
+
+\bibitem{doi:10.1137/18M1206497}
+Pedro~S. Peixoto and Martin Schreiber.
+\newblock Semi-lagrangian exponential integration with application to the
+  rotating shallow water equations.
+\newblock {\em SIAM Journal on Scientific Computing}, 41(5):B903--B928, 2019.
+
+\bibitem{https://doi.org/10.1002/qj.3191}
+Pedro~S. Peixoto, John Thuburn, and Michael~J. Bell.
+\newblock Numerical instabilities of spherical shallow-water models considering
+  small equivalent depths.
+\newblock {\em Quarterly Journal of the Royal Meteorological Society},
+  144(710):156--171, 2018.
+
+\bibitem{tan1992shallow}
+Wei-Yan Tan.
+\newblock {\em Shallow water hydrodynamics: Mathematical theory and numerical
+  solution for a two-dimensional system of shallow-water equations}.
+\newblock Elsevier, 1992.
+
+\bibitem{ComparingNumericalAccuracyofIcosahedralAGridandCGridSchemesinSolvingtheShallowWaterModel}
+Yonggang~G. Yu, Ning Wang, Jacques Middlecoff, Pedro~S. Peixoto, and Mark~W.
+  Govett.
+\newblock Comparing numerical accuracy of icosahedral a-grid and c-grid schemes
+  in solving the shallow-water model.
+\newblock {\em Monthly Weather Review}, 148(10):4009 -- 4033, 2020.
+
+\end{thebibliography}

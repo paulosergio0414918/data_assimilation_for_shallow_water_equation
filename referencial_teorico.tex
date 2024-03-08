@@ -23,6 +23,12 @@
 \begin{document}
 	
 	\maketitle
+	\section{Problema de pesquisa}
+	
+	Abaixo mostramos que \cite{kevlahan2019convergence} e \cite{khan2022data} garante a assimilação da equação de águas rasas usando bases gradiente é possível se tivermos ao menos dois sensores com distancia mínima $\frac{\lambda_{\textrm{mim}}}{2}$ onde $\lambda$ é a frequência de Nyquist  associado à condição inicial real. Esse resultado é válido para as demais técnicas de assimilação de dados apresentada nas referências do artigo \cite{ghorbani2023data} ?
+	
+	\textcolor{red}{procurar do que se trata frequência de Nyquist}
+	
 	\section{Artigos Core}
 	\cite{kevlahan2019convergence} Este artigo é o primeiro de três artigos do Nicolas Kevlahan que consiste em tentar fazer uma assimilação unidimensional de SWE e recuperar a condição inicial. Os autores focam nos aspectos computacionais do problema de  escolher o número de observações da superfície da onda  e localização de sensores para aproximar assimilação dos dados usando a técnica variacional a qual estudarei usando a \cite{furtado2012data}.
 	
@@ -34,6 +40,8 @@
 	
 	
 	\cite{khan2022data} É a versão para duas dimensões para o artigo acima, é de fundamental importância entender a estratégia usada por ele aqui para assimilar a condição inicial da equação e tentar verificar se é possível usar esta estratégia via machine learning ou vai deep learnning. A estratégia a ser adotada acredito que se encontra no artigo \cite{ghorbani2023data}.
+	
+	A literatura  \cite{HARTER20082621} e \cite{CampusVelhoHarter} nos traz que o Filtro de Kalmam é muito eficiente para a captura da condição inicial, no entanto requer grande esforço computacional e frequentemente é necessário paralelismo em sua execução. Uma alternativa para solucionar este problema é a utilização de rede neural de perceptron de  multicamada. 
 	
 	
 	\section{Artigos Relevantes}
@@ -53,6 +61,16 @@
 	\section{Secundários}
 	
 	Para dar inicio ao estudo da equação de águas rasas usarei principalmente \cite{vallis2017atmospheric}. Esta é a referência citada pelo professor Pedro durante o curso de métodos de volumes finitos.
+	
+	
+	\section{Afazeres!}
+	\begin{itemize}
+		\item{procurar do que se trata frequência de Nyquist}
+		\item{Procurar referência para assimilação por filtro de Kalmom}
+		\item{Procurar referência para assimilação por filtro de Kalmom ensemble}
+		\item{Procurar referência para assimilação por metodo varicional}
+		\item{Procurar referência para assimilação por deep data}
+	\end{itemize}
 	
 	\pagebreak
 	

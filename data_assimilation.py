@@ -45,17 +45,17 @@ u = u_g(x_values)
 kappa1 = 0.5 * (1-CFL)
 kappa2 = 0.5 * (1+CFL)
 
-Matriz_M = np.zeros([N,N])
+Matrix_M = np.zeros([N,N])
 for i in range(N):
     for j in range(N):
         if i - j == 1:
-            Matriz_M[i,j] = kappa2
+            Matrix_M[i,j] = kappa2
         elif i - j == -1:
-            Matriz_M[i,j] = kappa1
+            Matrix_M[i,j] = kappa1
         elif i == 0 and j == N-1:
-            Matriz_M[i,j] = kappa2
+            Matrix_M[i,j] = kappa2
         elif j == 0 and i == N-1:
-            Matriz_M[i,j] = kappa1
+            Matrix_M[i,j] = kappa1
 
 
 
@@ -76,10 +76,7 @@ for i in range(450):
         plt.pause(5)
     else:
         plt.pause(0.01)
-    u = Matriz_M @ u
-    #u_foreward = np.roll(u,1)
-    #u_backward = np.roll(u,-1) 
-    #u = kappa2*u_foreward+kappa1*u_backward
+    u = Matrix_M @ u
 
 plt.show()
 
@@ -94,6 +91,7 @@ plt.show()
 
 
 '''
+
 #leap-frog method
 #using one step of lax-friederichs to initiate the leapfrog method
 

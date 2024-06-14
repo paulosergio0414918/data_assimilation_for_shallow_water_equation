@@ -40,29 +40,31 @@ else:
 
 kappa1 = 0.5 * (1-CFL)
 kappa2 = 0.5 * (1+CFL)
-'''
-Matrix_M = np.zeros([N,N])
-for i in range(N):
-    for j in range(N):
-        if i - j == 1:
-            Matrix_M[i,j] = kappa2
-        elif i - j == -1:
-            Matrix_M[i,j] = kappa1
-        elif i == 0 and j == N-1:
-            Matrix_M[i,j] = kappa2
-        elif j == 0 and i == N-1:
-            Matrix_M[i,j] = kappa1
-'''
 
 ###########collecting samples ################
 
 
-X_obs = np.linspace(sample_window[0],sample_window[1],n_sample)
-Y_obs = u_zero(X_obs)
+#X_obs = np.linspace(sample_window[0],sample_window[1],n_sample)
+#Y_obs = u_zero(X_obs)
+
+X_obs = []
+Y_obs = []
 
 #Y_obs = np.zeros(len(x_values))
 
 
+for _ in range(m_sample):
+    random_time = rd.uniform(sample_window[0],sample_window[1])
+    #print(random_time)
+    for _ in range(n_sample):
+        random_space = rd.uniform(-delta_sample,delta_sample)
+        #X_obs += [sample_window[0] + random_space]
+        #Y_obs += [u_zero(random_space)]
+        X_obs += [sample_window[0] + random_space]
+
+Y_obs = u_zero(X_obs)
+        
+        #Cost += 0.5*(abs(u_zero(random_space)-u_g(random_space))**2)
 
 #print(f'Erro = {Cost}.')
 
@@ -70,8 +72,6 @@ Y_obs = u_zero(X_obs)
 ################# data assimilation ################
 
 # for i in reversed(range(n)): loop backwards
-
-
 
 #grad = u = np.zeros(len(x_values))
 
@@ -83,7 +83,8 @@ x_values = np.array(sorted(set(np.concatenate((np.linspace(-L,L,N),X_obs)))))
 #u = u_zero(x_values)
 #u = u_g(x_values)
 u = np.zeros(len(x_values))
-'''
+
+
 #código antigo que eu estava executando
 
 for j in range(10):
@@ -114,8 +115,8 @@ for j in range(10):
 print('End of process.')
 plt.show()
 '''
-
-#nova versão onde vou desconsidera o tempo
+#Esta versão esta funcionando
+#nova versão onde vou desconsidera o tempo 
 for j in range(10):
     plt.clf()
     plt.ylim(-0.025, 0.1) # y limit
@@ -131,7 +132,7 @@ for j in range(10):
         for i in range(len(x_values)):
             if X_obs[j] == x_values[i]:
                 Cost1 += 0.5*(abs(Y_obs[j]-u[i])**2)
-                
+                #print(f'valor no grafico {x_values[i]} e valor na amostra {X_obs[j]}')
     if Cost1 > Cost:
         print(f'O funcional custo almentou para = {Cost1}.')
     elif Cost1 < Cost:
@@ -143,15 +144,16 @@ for j in range(10):
 print('End of process.')
 plt.show()
 
+'''
 
 
-
-
-
+###############################
+###### rascunho################
+###############################
 
 
 '''
-
+/home/oem/Desktop/usp/MAP_0000_Tese_de_Doutorado/bibliografia/rascunho.py
 #leap-frog method
 #using one step of lax-friederichs to initiate the leapfrog method
 
@@ -173,4 +175,63 @@ for _ in range(M):
 plt.show()
 #Data Assimilation for advection equation
 
+'''
+
+
+'''
+Matrix_M = np.zeros([N,N])
+for i in range(N):
+    for j in range(N):
+        if i - j == 1:
+            Matrix_M[i,j] = kappa2
+        elif i - j == -1:
+            Matrix_M[i,j] = kappa1
+        elif i == 0 and j == N-1:
+            Matrix_M[i,j] = kappa2
+        elif j == 0 and i == N-1:
+            Matrix_M[i,j] = kappa1
+
+
+não compilar nunca
+# não compilar nunca
+# não compilar nunca
+# não compilar nunca
+# não compilar nunca
+# não compilar nunca
+# não compilar nunca
+# aqui será depositado tudo que retirei do arquivo original
+
+
+
+
+
+
+
+
+
+
+#linha 64
+Cost = 0
+for _ in range(m_sample):
+    random_time = rd.uniform(sample_window[0],sample_window[1])
+    print(random_time)
+    for _ in range(n_sample):
+        random_space = rd.uniform(-delta_sample,delta_sample)
+        X_obs += [sample_window[0] + random_space]
+        Y_obs += [u_zero(random_space)]
+        Cost += 0.5*(abs(u_zero(random_space)-u_g(random_space))**2)
+
+print(f'Erro = {Cost}.')
+
+
+
+
+        if i == int(math.ceil(M/2)):
+            plt.pause(0.01)
+            #plt.pause(5)
+        else:
+            plt.pause(0.01)
+            u_foreward = np.roll(u,1)
+            u_backward = np.roll(u,-1) 
+            u = kappa2*u_foreward+kappa1*u_backward
 '''

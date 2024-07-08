@@ -11,19 +11,15 @@ N = 1024
 a = 1 
 T = 2
 # Sample window needs to be greater than 0 end less than 2
-sample_window = [-0.5,0.5] 
-
-n_sample = 10 #number of samples in space
-m_sample = 1 #number of samples in time
-delta_sample = 0.25 #dispersão das amostras
 Cost = 0
+n_testes = 100
+
 ############## Initial condition ###########
 def u_zero(x:float) -> float: #real and unknown initial condicion
     return (1/20)*np.exp(-(10*x)**2)
 
 def u_g(x:float) -> float: # first guess to initial condition
-    denominator = rd.randint(15,25)
-    return (1/denominator)*np.exp(-(10*x)**2)
+    return np.zeros(len(x))
 
 ##############  Method #########
 
@@ -40,137 +36,79 @@ else:
 
 kappa1 = 0.5 * (1-CFL)
 kappa2 = 0.5 * (1+CFL)
-'''
-Matrix_M = np.zeros([N,N])
-for i in range(N):
-    for j in range(N):
-        if i - j == 1:
-            Matrix_M[i,j] = kappa2
-        elif i - j == -1:
-            Matrix_M[i,j] = kappa1
-        elif i == 0 and j == N-1:
-            Matrix_M[i,j] = kappa2
-        elif j == 0 and i == N-1:
-            Matrix_M[i,j] = kappa1
-'''
+
+def leap_frog(x):
+  u_foreward = np.roll(x,1)
+  u_backward = np.roll(x,-1) 
+  v = kappa2*u_foreward+kappa1*u_backward
+  return v
+
+def leap_frog_transposto(x):
+  u_foreward = np.roll(x,1)
+  u_backward = np.roll(x,-1) 
+  v = kappa1*u_foreward+kappa2*u_backward
+  return v
 
 ###########collecting samples ################
 
+tempo_das_amostras = [0,0.5,1,1.5]
 
-X_obs = np.linspace(sample_window[0],sample_window[1],n_sample)
-Y_obs = u_zero(X_obs)
+matriz_de_amostras = np.zeros((N,len(tempo_das_amostras)))
 
-#Y_obs = np.zeros(len(x_values))
-
-
-
-#print(f'Erro = {Cost}.')
-
-
-################# data assimilation ################
-
-# for i in reversed(range(n)): loop backwards
-
-
-
-#grad = u = np.zeros(len(x_values))
-
-#New_u_zero = u + lam * grad
+for i in range(N):
+  matriz_de_amostras[i,:] = u_zero((i-N/2)*delta_x)
 
 
 ############ Ploting ###############################
-x_values = np.array(sorted(set(np.concatenate((np.linspace(-L,L,N),X_obs)))))
-#u = u_zero(x_values)
-#u = u_g(x_values)
+x_values = np.linspace(-L,L,N)
+d = np.zeros((N,len(tempo_das_amostras)))
+gess = u_g(x_values)
 u = np.zeros(len(x_values))
-'''
-#código antigo que eu estava executando
 
-for j in range(10):
-    for i in range(int(math.ceil(N*2.5/(2*L)))):
-        plt.clf()
-        plt.ylim(-0.025, 0.1) # y limit
-        plt.xlim(-0.5, 2.5) # x limit
-        plt.plot(X_obs,Y_obs, marker = 'o', ms = 1, ls = '', color = 'red')
-        plt.plot(x_values, u, lw = 1, color = 'black', )
-        plt.title(f'Execução {j+1} de 10.  T= {i*delta_t*8:.1f} h. de 20h')
-        if i == int(math.ceil(M/2)):
-            plt.pause(0.01)
-            #plt.pause(5)
-        else:
-            plt.pause(0.01)
-            u_foreward = np.roll(u,1)
-            u_backward = np.roll(u,-1) 
-            u = kappa2*u_foreward+kappa1*u_backward
-    Cost1 = sum(0.5*(abs(u_zero(x_values)-u)))#retirei o quadrado aqui
-    if Cost1 > Cost:
-        print(f'O Erro almentou para = {Cost1}.')
-    elif Cost1 < Cost:
-        print(f'O Erro diminuiu para = {Cost1}.')
-    else:
-        print(f'O Erro não alterou')
-    Cost = Cost1
-    u = 0.5*(u+u_zero(x_values))
-print('End of process.')
-plt.show()
-'''
+error = []
 
-#nova versão onde vou desconsidera o tempo
-for j in range(10):
+
+for j in range(n_testes):
+    #ploting the graph
     plt.clf()
     plt.ylim(-0.025, 0.1) # y limit
-    plt.xlim(-0.5, 2.5) # x limit
-    plt.plot(X_obs,Y_obs, marker = 'o', ms = 2, ls = '', color = 'red')
-    plt.plot(x_values, u, lw = 1, color = 'black', )
+    plt.xlim(-L, L) # x limit
+    plt.plot(x_values, gess, lw = 1, color = 'black', )
     plt.plot(x_values, u_zero(x_values), lw = 1, color = 'blue', )
-    plt.title(f'Execução {j+1} de 10.')
-    plt.pause(1)
-    New_u = 0.5*(u+u_zero(x_values))
+    plt.title(f'Execução {j+1} de {n_testes}.')
+    plt.pause(0.1)
+    # computing the cost
     Cost1 = 0
-    for j in range(len(X_obs)):
-        for i in range(len(x_values)):
-            if X_obs[j] == x_values[i]:
-                Cost1 += 0.5*(abs(Y_obs[j]-u[i])**2)
-                
+    for i in range(N):
+        Cost1 = Cost1 + (u_zero(x_values[i])-gess[i])**2
     if Cost1 > Cost:
         print(f'O funcional custo almentou para = {Cost1}.')
     elif Cost1 < Cost:
         print(f'O funcional custo diminuiu para = {Cost1}.')
     else:
         print(f'O funcional custo não alterou')
+    error += [Cost1]
     Cost = Cost1
-    u = New_u
+    # computing the discrepance
+    for i in range(len(tempo_das_amostras)):
+        d[:,i] = gess - matriz_de_amostras[:,i]
+    # computing the gradient
+    grad = d[:,i]
+    for i in range(len(tempo_das_amostras)-1, 0, -1):
+        grad = leap_frog_transposto(grad)+d[:,i-1]
+    # update the inition condition
+    gess = gess-0.3*grad
+
+plt.show()
+
+'''
+plt.clf()
+vetor = [i for i in range(n_testes)]
+plt.plot(vetor, error)
+plt.show()
+'''
+
+
 print('End of process.')
-plt.show()
 
-
-
-
-
-
-
-
-'''
-
-#leap-frog method
-#using one step of lax-friederichs to initiate the leapfrog method
-
-u_backward = u_zero(x_values)
-u_right = np.roll(u,1)
-u_left = np.roll(u,-1) 
-u_middle = u = kappa1*u_right+kappa2*u_left
-for _ in range(M):
-    for i in range(N-1):
-        if i == 0 or i == -1:
-            u[i] = u_middle[i]
-        else:
-            u[i]=u_backward[i]+CFL*(u_middle[i+1]-u_middle[i-1])
-        u_backward = np.copy(u_middle)
-        u_middle = np.copy(u)
-    plt.clf()
-    plt.plot(x_values,u, color = 'black', )
-    plt.pause(0.1)
-plt.show()
-#Data Assimilation for advection equation
-
-'''
+#print(error)i

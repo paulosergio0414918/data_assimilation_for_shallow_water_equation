@@ -1,5 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
+import numpy as np # type: ignore
+import matplotlib.pyplot as plt # type: ignore
 import math
 
 ############ parâmetros ###################
@@ -9,7 +9,7 @@ option = 1  #<-- esta opção apresenta o gráfico da assimilação
 #option = 4 #<-- só os graficos da opção 3 
 #option = 5 #<--grafico da transfomada de Fourier da condição inicial
 #option = 6 #<--grafico da condição inicial
-n_testes = 1000
+n_testes = 100
 n_amostras = 2
 
 ################ variables###############
